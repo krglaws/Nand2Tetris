@@ -14,6 +14,13 @@ CHIP FullAdder {
 
     PARTS:
 
+    HalfAdder(a=a, b=b, sum=s1, carry=c1);
+    HalfAdder(a=s1, b=c, sum=sum, carry=c2);
+    Or(a=c1, b=c2, out=carry);
+
+/*
+    Dumb way of doing things:
+
     Not(in=a, out=na);
     Not(in=b, out=nb);
     Not(in=c, out=nc);
@@ -38,4 +45,5 @@ CHIP FullAdder {
 
     And(a=banda, b=c, out=allHigh);
     Or(a=oneHigh, b=allHigh, out=sum);
+*/
 }
