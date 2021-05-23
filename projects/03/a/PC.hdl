@@ -16,5 +16,17 @@ CHIP PC {
     OUT out[16];
 
     PARTS:
-    // Put your code here:
+    Register(in=infinal, load=loadfinal, out=innerOut, out=out);
+
+    // check if load pin should be set
+    Or(a=reset, b=inc, out=resetOrInc);
+    Or(a=resetOrInc, b=load, out=loadfinal);
+
+    // increment out
+    Inc16(in=innerOut, out=incIn);
+
+    // build possible inputs
+    Mux16(a[0..15]=false, b=incIn, sel=inc, out=incElseOut);
+    Mux16(a=incElseOut, b=in, sel=load, out=loadElseInc);
+    Mux16(a=loadElseInc, b[0..15]=false, sel=reset, out=infinal);
 }
