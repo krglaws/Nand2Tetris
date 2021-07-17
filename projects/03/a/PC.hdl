@@ -26,7 +26,7 @@ CHIP PC {
     Inc16(in=innerOut, out=incIn);
 
     // build possible inputs
-    Mux16(a[0..15]=false, b=incIn, sel=inc, out=incElseOut);
+    Mux16(a=innerOut, b=incIn, sel=inc, out=incElseOut);
     Mux16(a=incElseOut, b=in, sel=load, out=loadElseInc);
     Mux16(a=loadElseInc, b[0..15]=false, sel=reset, out=infinal);
 }
